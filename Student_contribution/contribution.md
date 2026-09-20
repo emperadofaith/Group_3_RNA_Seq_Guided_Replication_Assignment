@@ -14,6 +14,6 @@ The group retained the same members from the previous RNA-seq assignment and con
 | **Cadungog, Ella Pearl V.** | Data Lead | Located the RNA-seq accession numbers and appropriate reference files needed for the analysis. |
 | **Emperado, Faith Denielle** | Documentation Lead | Organized the GitHub repository, README, screenshots, and workflow documentation. |
 | **Ijan, Shane Mae B.** | Galaxy Lead | Operated Galaxy and carried out the RNA-seq analysis workflow and related tasks. |
-| **Gregorio, Richelle O.** | Interpretation Lead | Helped interpret the re-analysis results and compare the findings with the original study. |
-| **Vertudazo, Maria Ryzah May I.** | Interpretation Lead | Helped interpret the re-analysis results and compare the findings with the original study. |
+| **Gregorio, Richelle O.** | Interpretation Lead | Interpret the re-analysis results and compare the findings with the original study. |
+| **Vertudazo, Maria Ryzah May I.** | Interpretation Lead | Interpret the re-analysis results and compare the findings with the original study. |
 
