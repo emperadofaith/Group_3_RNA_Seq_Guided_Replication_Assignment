@@ -8,6 +8,8 @@
 
 The group retained the same members from the previous RNA-seq assignment and continued working on the assigned topic, **Infection**. To help organize the RNA-seq guided replication, each member was given a primary role based on a specific part of the activity. These roles served as each member's main area of focus, but they did not limit members to only their assigned responsibilities. Everyone was encouraged to communicate, share ideas, and assist with other tasks whenever needed.
 
+-----
+
 | Member | Role | Main Contribution |
 |---|---|---|
 | **Behante, Fretz Ivan M.** | Literature Lead | Reviewed the selected research paper and focused on understanding its study design and relevant information. |
