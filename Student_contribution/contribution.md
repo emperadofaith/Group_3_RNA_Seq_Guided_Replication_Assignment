@@ -19,6 +19,7 @@ The group retained the same members from the previous RNA-seq assignment and con
 | **Gregorio, Richelle O.** | Interpretation Lead | Interpret the re-analysis results and compare the findings with the original study. |
 | **Vertudazo, Maria Ryzah May I.** | Interpretation Lead | Interpret the re-analysis results and compare the findings with the original study. |
 
-
-Although each member had a designated role, the group worked together throughout the activity. The literature review, data preparation, Galaxy analysis, interpretation, and documentation were connected, so members regularly assisted one another when needed. The group also discussed the results together to better understand the findings and their connection to the original research paper. Overall, the assigned roles helped organize the workload while allowing all members to contribute to the RNA-seq guided replication, analysis, interpretation, and preparation of the final group paper.
+----
+# Group collaboration
+Although each member had a designated role, the group worked together throughout the activity. The literature review, data preparation, Galaxy analysis, interpretation, and documentation were connected so members regularly assisted one another when needed. Overall, the assigned roles helped organize the workload while allowing all members to contribute to the RNA-seq guided replication, analysis, interpretation, and preparation of the final group paper.
 
