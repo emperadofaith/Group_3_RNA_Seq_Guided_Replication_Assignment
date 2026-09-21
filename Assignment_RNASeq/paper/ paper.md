@@ -10,7 +10,7 @@ A published RNA-seq study on Salmonella typhi infection of human intestinal tiss
 Galaxy was used to perform quality control, read mapping, gene counting, and differential expression analysis on the RNA-seq data. The results of the initial study were then compared with the resulting gene expression patterns. This exercise shows how reproducible molecular biology research can be supported by reanalyzing and documenting publicly available sequencing data using GitHub and Galaxy.
 
 
-**OBJECTIVES**
+**Objectives**
 
 Understand the relationship between genomes, genes, RNA, and gene expression.
 
@@ -30,7 +30,986 @@ Compare our results with the original study.
 
 Document the analysis using Galaxy and GitHub.
 
-Table 1. Summary of the *Salmonella typhi* infected experiment and RNA-Seq data. 
-<img width="617" height="1344" alt="IMG_2305" src="https://github.com/user-attachments/assets/93a9b423-12f0-4d2a-b84c-41700f72cab0" />
+
+## Group Organization and Assigned Roles
+
+The group retained the same members from the previous RNA-seq assignment and continued working on the assigned topic (Infection). Specific roles were assigned to each member to provide a main area of focus during the RNA-seq guided replication. Note that these roles did not limit the members to their assigned responsibilities. All group members contributed to and assisted with the different tasks involved in the analysis and preparation of this paper, while each member primarily focused on their designated role. 
+
+*Literature Lead:* **Behante, Fretz Ivan M.**
+
+Mainly focused on reviewing the selected research paper and its study design.
+
+*Data Lead*: **Cadungog, Ella Pearl V. **
+
+Mainly focused on locating the RNA-seq accession numbers and appropriate reference files.
+
+*Documentation Lead*: **Emperado, Faith Denielle**
+
+Mainly focused on organizing the GitHub repository, README, screenshots, and workflow documentation.
+
+*Galaxy Lead*: **Ijan, Shane Mae B.**
+
+Mainly focused on operating Galaxy and carrying out the RNA-seq analysis workflow.
+
+*Interpretation Lead*: **Gregorio, Richelle O.** and **Vertudazo, Maria Ryzah May I.**
+
+Mainly focused on interpreting the re-analysis results and comparing them with the original study. 
+
+**Table 1.** Summary of the *Salmonella typhi* infected experiment and RNA-Seq data. 
+
+**Item**
+
+**Group Answer**
+
+Full title of the paper
+
+*Salmonella typhi* Colonization Provokes Extensive Transcriptional Changes Aimed at Evading Host Mucosal Immune Defense During Early Infection of Human Intestinal Tissue
+
+Authors
+
+K. P. Nickerson, S. Senger, Y. Zhang, R. Lima, S. Patel, L. Ingano, W. A. Flavahan, D. K. V. Kumar, C. M. Fraser, C. S. Faherty, M. B. Sztein, M. Fiorentino, A. Fasano
+
+Year
+
+2018
+
+Journal
+
+EBioMedicine 
+
+Organism
+
+*Salmonella typhi* (strain Ty2) 
+
+Tissue or cell type
+
+Human intestinal tissue/terminal ileum biopsies 
+
+Assigned stress topic 
+
+Infection
+
+Control condition
+
+Non-infected; mock-treated human intestinal biopsies.
+
+Treatment/stress condition
+
+Human intestinal biopsies infected/colonized with *S. typhi* for 2 hours. 
+
+Number of biological replicates
+
+4 control human biopsies, 5 infected human biopsies, and 4 bacterial control samples.
+
+RNA-seq repository
+
+[**GSE113333**](https://pmc.ncbi.nlm.nih.gov/articles/PMC6013756/) 
+
+BioProject / Study accession
+
+PMID: [29735417](https://pubmed.ncbi.nlm.nih.gov/29735417/) 
+
+Run accession numbers that the group plans use
+
+SRR702901
+
+SRR702902
+
+SRR702903
+
+SRR702905
+
+SRR702906
+
+SRR702907
+
+Reference genome accession 
+
+NC_004631.1
+
+Annotation source
+
+NCBI Reference Sequence (RefSeq), *Salmonella enterica* serovar Typhi strain Ty2, NC_004631.1.
+
+Approximate size of the selected RNA-seq files
+
+SRR702901 - 786.6 mb
+
+SRR702902 - 887.8 mb
+
+SRR702903 - 860.1 mb
+
+SRR702905 - 894.7 mb
+
+SRR702906 - 729. 6 mb
+
+SRR702907 - 912.1 mb
+
+Short description of the authors’ RNA-seq analysis pipeline
+
+RNA was extracted and sequenced using Illumina HiSeq 2500. Reads underwent quality control using FastQC, followed by alignment to the human genome using TopHat and to the *S. Typhi Ty2* genome using Bowtie. Reads were counted using HTSeq, and differential gene expression was analyzed using DESeq. 
 
 
+## RNA-Seq Quality Control
+
+Quality control was performed on the six selected RNA-seq samples using FastQC in Galaxy to assess the overall quality of the sequencing data. The individual FastQC reports were then summarized using the MultiQC tool in Galaxy for easier comparison among the samples. The results were examined based on the number of reads, general sequence quality, adapter contamination, overrepresented sequences, and other possible quality problems. The summarized quality control results are presented in Table 2.
+
+**Table 2.** RNA-Seq read quality, adapter contamination, sequence composition, and duplication profiles of uninfected and infected tissue biopsies.
+
+**Control_rep1**
+
+**Control_rep2**
+
+**Control_rep3**
+
+**Infected_rep1**
+
+**Infected_rep2**
+
+**Infected_rep3**
+
+**Run Accession**
+
+SRR7029701
+
+SRR7029702
+
+SRR7029703
+
+SRR7029705
+
+SRR7029706
+
+SRR7029707
+
+**Condition**
+
+Uninfected tissue biopsy
+
+Uninfected tissue biopsy
+
+Uninfected tissue biopsy
+
+Infected tissue biopsy
+
+Infected tissue biopsy
+
+Infected tissue biopsy
+
+**Number of reads**
+
+20.80 M
+
+23.5 M
+
+22/6 M
+
+23.8 M
+
+21.1 M
+
+24.4 M
+
+**General sequence quality**
+
+High quality; Pass (🗸)
+
+High quality; Pass (🗸)
+
+High quality; Pass (🗸)
+
+High quality; Pass (🗸)
+
+High quality; Pass (🗸)
+
+High quality; Pass (🗸)
+
+**Adapter contamination**
+
+No significant contamination; Pass (🗸)
+
+No significant contamination; Pass (🗸)
+
+No significant contamination; Pass (🗸)
+
+No significant contamination; Pass (🗸)
+
+No significant contamination; Pass (🗸)
+
+No significant contamination; Pass (🗸)
+
+**Overrepresented sequences**
+
+Present; Warning (!)
+
+Present; Warning (!)
+
+Present; Warning (!)
+
+Present; Warning (!)
+
+Present; Warning (!)
+
+Present; Warning (!)
+
+**Obvious quality problem (s)**
+
+Warnings in per-base sequence content,  per sequence GC content, duplication levels, and overrepresented sequences.
+
+Warnings in per-base sequence content,  per sequence GC content, duplication levels, and overrepresented sequences.
+
+Per-sequence GC content and sequence duplication levels failed; warnings in per-base sequence content and overrepresented sequences.
+
+Per-sequence GC content and sequence duplication levels failed; warnings in per-base sequence content and overrepresented sequences.
+
+Per-sequence GC content and sequence duplication levels failed; warnings in per-base sequence content and overrepresented sequences.
+
+Per-sequence GC content and sequence duplication levels failed; warnings in per-base sequence 
+
+All six RNA-seq libraries produced adequate sequencing depth (20.1–24.4 million reads) and passed overall sequence-quality and adapter-contamination assessments, indicating generally reliable read quality. All samples showed overrepresented sequences and warnings for per-base sequence composition, GC-content distribution, and sequence duplication, suggesting potential transcript abundance bias or technical variation. Control_rep3 and Infected_rep1 failed the per-sequence GC-content assessment, while Infected_rep2 and Infected_rep3 additionally failed the sequence-duplication assessment, indicating reduced library complexity or possible PCR amplification bias. The datasets are suitable for downstream RNA-seq analysis, but these quality-control features should be considered during preprocessing and interpretation of differential gene expression.
+
+**Figure 1.** MultiQC summary of FastQC status checks for the six selected RNA-seq samples.
+
+The quality control results presented in Table 2 were obtained from the FastQC reports summarized using MultiQC in Galaxy. Figure 1 shows the overall FastQC status checks for the six selected RNA-seq samples.
+
+## Read Trimming Assessment
+
+Read trimming was not performed in this re-analysis, consistent with the original study, in which the authors did not report performing a read-trimming step. The initial FastQC and MultiQC results also showed that all six RNA-seq samples had good per-base sequence quality and passed the adapter content check. Although some warnings and failures were observed in other quality metrics, these did not indicate a clear need for adapter or quality trimming. Therefore, the original untrimmed reads were retained and used for the subsequent alignment analysis.
+
+## Reference Genome and Gene Annotation
+
+The reference genome and gene annotation files were obtained to ensure accurate alignment and gene-level read counting of the RNA-seq data. Following the reference used in the original study, the Homo sapiens GRCh38 genome assembly and its corresponding Ensembl Release 78 annotation were selected. Using genome and annotation files from the same assembly ensures compatibility and reduces the possibility of incorrect read assignment. The reference files used in the analysis are summarized in Table 3.
+
+**Table 3.** Reference Genome and Gene Annotation Files Used for RNA-Seq Analysis.
+
+**Component**
+
+**Version / File Used**
+
+**Organism**
+
+*Homo sapiens*
+
+**Genome assembly**
+
+GRCh38
+
+**Assembly accession**
+
+GCA_000001405.15
+
+**Ensembl release**
+
+Release 78
+
+**Genome FASTA**
+
+Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+
+**Gene annotation**
+
+Homo_sapiens.GRCh38.78.gtf.gz
+
+**Annotation format**
+
+GTF
+
+The genome FASTA and GTF annotation both correspond to the GRCh38 assembly. The GTF file is from Ensembl Release 78, matching the GRCh38.78 reference reported in the original study.
+
+**Figure 2** GRCh38 reference genome FASTA and Ensembl Release 78 GTF annotation uploaded to the Galaxy history. 
+
+The Homo sapiens GRCh38 primary assembly FASTA and the corresponding Ensembl Release 78 GTF annotation were uploaded to Galaxy for RNA-seq analysis. As shown in Figure 2, the Galaxy history contains both Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz and Homo_sapiens[.GRCh38.78.gtf.gz](http://.grch38.78.gtf.gz/).
+
+*Annotation source:* [*https://ftp.ensembl.org/pub/release-78/gtf/homo_sapiens/*](https://ftp.ensembl.org/pub/release-78/gtf/homo_sapiens/)* *
+
+## RNA-Seq Read Mapping
+
+The selected RNA-seq samples were mapped to the Homo sapiens GRCh38 reference genome using TopHat in Galaxy, following the alignment approach used in the original study. The same mapping settings were applied consistently to all three control and three infected samples. After alignment, the total reads, percentage mapped, percentage uniquely mapped, and any unusually low mapping results were recorded to evaluate the success of the alignment. The mapping results for all six samples are presented in Table 4. 
+
+**Table 4.** Mapping Statistics of the Selected RNA-Seq Samples Using TopHat
+
+**Sample**
+
+**Total Reads**
+
+**Percentage Mapped**
+
+**Percentage Uniquely Mapped**
+
+**Unusually Low Mapping?**
+
+SRR7029701
+
+20,768,901
+
+96.1%
+
+77.5%
+
+No
+
+SRR7029702
+
+23,483,399
+
+96.7%
+
+77.5%
+
+No
+
+SRR7029703
+
+22,642,554
+
+95.4%
+
+73.1%
+
+No
+
+SRR7029705
+
+23,750,360
+
+93.1%
+
+67.6% 
+
+No
+
+SRR7029706
+
+20,081,963
+
+93.9%
+
+56.5%
+
+No
+
+SRR7029707
+
+24,357,703
+
+89.7% 
+
+61.3% 
+
+Yes
+
+Table 4 Shows the result after mapping statistics of the selected RNA-sequence samples using TopHat which reveals that most of the RNA-seq reads successfully matched to the human genome, while the SRR7029707 is the only one that showed unusually low mapping compared to others could indicate that it may still need a further checking.
+
+## Gene-Level Read Counting
+
+Gene-level read counting was performed using the featureCounts tool in Galaxy. The mapped RNA-seq files from TopHat were analyzed using the matching Homo sapiens GRCh38.78 GTF annotation. The same counting settings were applied to all six samples to determine the number of mapped reads associated with each gene. The resulting featureCounts outputs were compiled into a single gene count table containing the three control and three infected samples. Since the complete output contained approximately 64,254 gene entries, only the first 10 entries are presented in Table 5.
+
+**Table 5.** Gene-Level Read Counts Generated Using featureCounts for the Selected Control and Salmonella Typhi-Infected RNA-Seq Samples.
+
+**Geneid**
+
+**SRR7029701**
+
+**SRR7029702**
+
+**SRR7029703**
+
+**SRR7029705**
+
+**SRR7029706**
+
+**SRR7029707**
+
+ENSG00000223972
+
+0
+
+0
+
+0
+
+1
+
+0
+
+0
+
+ENSG00000227232
+
+1
+
+0
+
+0
+
+1
+
+1
+
+0
+
+ENSG00000278267
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+ENSG00000243485
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+ENSG00000274890
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+ENSG00000237613
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+ENSG00000268020
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+ENSG00000240361
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+ENSG00000186092
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+ENSG00000238009
+
+0
+
+0
+
+1
+
+0
+
+0
+
+0
+
+The gene count table was compiled from the featureCounts outputs of the six selected RNA-seq samples (Galaxy datasets #89, #91, #93, #95, #97, and #99). The same Ensembl Release 78 GTF annotation was used for gene-level counting across all samples. Only the first 10 gene entries are presented in the table.
+
+The complete gene-level read count results can be accessed through the following Google Sheets file: [Gene Count Table](https://docs.google.com/spreadsheets/d/1adOrdPHLrHxZW-sUK5AX3w41Tm0y5aB4EpGHQczdrNI/edit?gid=0#gid=0)
+
+## Differential Gene Expression Analysis
+
+Differential gene expression analysis was performed using DESeq2 in Galaxy to compare the three *S. Typhi*-infected samples with the three control samples. The control condition was used as the reference. DESeq2 generated the log2 fold change and adjusted *p*-value for each gene, which were used to identify significantly upregulated and downregulated genes. Galaxy's DESeq2 output reports the gene ID, base mean, log2FC, standard error, Wald statistic, *p*-value, and adjusted *p*-value.
+
+**Table 6.** Summary of Differential Gene Expression Analysis. 
+
+**DESeq2 Result**
+
+**Result**
+
+**Interpretation**
+
+Genes tested
+
+8,848
+
+Total genes included in the DESeq2 analysis
+
+Significantly differentially expressed genes
+
+32
+
+Genes with adjusted *p*-value < 0.05
+
+Positive log2 fold change
+
+10
+
+Significantly higher expression in the infected group
+
+Negative log2 fold change
+
+22
+
+Significantly lower expression in the infected group
+
+Adjusted *p*-value (FDR) threshold
+
+< 0.05
+
+Threshold used to determine statistical significance
+
+Table 6 shows the result based on the DESeq2 results, 32 genes were found to be significantly different between the infected and normal groups. Ten genes were more active, while 22 were less active in the infected group. This shows that the infection had an effect on gene expression.
+
+**Figure 3.** Filtering of genes with valid adjusted p-values. 
+
+The DESeq2 results were filtered using c7 != "NA" to remove genes without an adjusted p-value. From the original 64,253 genes, 8,848 genes remained and were included as the ‘Genes tested’ in the analysis**.**
+
+**Figure 4.** Filtering of significantly differentially expressed genes. 
+
+The DESeq2 results were filtered using c7 < 0.05, where c7 represents the adjusted p-value column. A value below 0.05 was used as the significance threshold, meaning only genes that met the 5% FDR criterion were retained. After filtering, 32 genes were identified as significantly differentially expressed between the infected and control groups.
+
+**Figure 5.** Filtering of significantly differentially expressed genes with positive log2 fold change.
+
+The significant genes were further filtered using c3 > 0, where c3 represents the log2 (FC) fold change column. This was done to identify genes with higher expression in the infected group compared with the control group. From the 32 significant genes, 10 genes had a positive log2 fold change.
+
+**Figure 6.** Filtering of significantly differentially expressed genes with negative log2 fold change.
+
+The significant genes were also filtered using c3 < 0, where c3 represents the log2 fold change column. This was done to identify genes with lower expression in the infected group compared with the control group. From the 32 significant genes, 22 genes had a negative log2 fold change.
+
+## Biological Interpretation of Selected Differentially Expressed Genes
+
+Five significantly differentially expressed genes were selected from the DESeq2 results for further biological interpretation. The selected genes included both upregulated and downregulated genes based on their log2 fold change and adjusted *p*-values. Their known or predicted functions were examined to determine their possible relationship to the host response to *Salmonella Typhi* infection. The selected genes and their biological interpretations are presented in Table 7.
+
+**Table 7.** Biological Interpretation of Selected Differentially Expressed Genes.
+
+***Gene ID***
+
+***Known / Predicted ***
+
+***Function***
+
+***Possible Connection ***
+
+***to Infection***
+
+***Gene Name***
+
+***log2FC***
+
+***Adjusted p-value***
+
+***Regulation***
+
+ENSG00000159189
+
+Component of C1q involved in activation of the classical complement pathway and immune defense against pathogens (Kishore & Reid, 2000).
+
+Increased C1QC expression may be associated with the host immune response to S. Typhi infection, as the complement system participates in host defense against Salmonella and interacts directly with S. Typhi during infection (Guerra et al., 2025).
+
+**C1QC**
+
+1.2846692191434
+
+0.0119356907175073
+
+Upregulated
+
+ENSG00000114771
+
+AADAC is a microsomal serine esterase involved in drug and lipid metabolism, including the hydrolysis of triglycerides and cholesterol esters (Yang et al., 2025). 
+
+AADAC may be involved in infection-associated changes in host lipid metabolism. In HCV-infected cells, reduced AADAC was associated with impaired triglyceride lipolysis, while AADAC knockdown also affected viral production, demonstrating that AADAC can function as a host factor during infection (Nourbakhsh et al., 2013).  
+
+**AADAC**
+
+1.23084248069221
+
+0.0119356907175073
+
+Upregulated
+
+ENSG00000169894
+
+MUC3A encodes a cell-surface-associated mucin that contributes to the protective and lubricating barrier of mucosal surfaces (National Center for Biotechnology Information [NCBI], 2026).
+
+Downregulation of MUC3A may reflect alterations in the intestinal mucosal barrier during infection, as intestinal mucins contribute to epithelial defense and protection against Salmonella infection (Han et al., 2024).
+
+**MUC3A**
+
+-1.27901894230378
+
+0.0217100003933316
+
+Downregulated
+
+ENSG00000177169
+
+ULK1 encodes a serine/threonine kinase that plays a key role in initiating and regulating autophagy, including autophagosome formation (NCBI, 2026).
+
+Downregulation of ULK1 may indicate altered autophagy-related host defense during infection, as Salmonella can suppress autophagy through mTORC1-mediated inhibition of ULK1, which may promote bacterial survival (Torsilieri et al., 2024).
+
+**ULK1**
+
+-1.04155304020782
+
+0.0369465420092696
+
+Downregulated
+
+ENSG00000176945
+
+MUC20 is a transmembrane mucin involved in maintaining epithelial barrier integrity and participating in cellular signaling and immune responses at epithelial surfaces (Montero et al., 2025). 
+
+The downregulation of MUC20 may indicate changes in the intestinal mucosal barrier during infection, as an enhanced mucosal barrier has been shown to reduce the invasion of Salmonella enterica in human small intestinal epithelial cells (Yamazaki et al., 2024).
+
+**MUC20**
+
+-1.35574649250627
+
+0.0103206277479366
+
+Downregulated
+
+The DESeq2 results identified five significant genes associated with S. Typhi infection, including C1QC and AADAC, which were upregulated, and MUC3A, ULK1, and MUC20, which were downregulated. These genes are mainly involved in immune defense, lipid metabolism, mucosal barrier integrity, and autophagy. Overall, the changes suggest that S. Typhi infection may alter host immune responses, intestinal barrier function, and cellular defense mechanisms. 
+
+## Comparison of the Re-analysis with the Original Study
+
+The results of the Galaxy re-analysis were compared with the findings of the original study. The comparison focused on the biological response, identified genes, analysis tools, samples used, and possible reasons for differences between the two results.
+
+***1. Did your group recover the same general biological response described by the authors?***
+
+Yes. The original paper reported that S. Typhi colonization triggers extensive transcriptional changes related to immune defense and mucosal barrier function during infection. The re-analysis similarly identified differential expression in genes tied to immune activation — the C1QC, and mucosal barrier integrity —MUC3A and MUC20, which these aspects support the original paper discussed by the authors. 
+
+***2. Were any of the genes highlighted in the paper also identified in your analysis?***
+
+The original paper specifically highlighted genes such as GSTM1, CRIP1, CCL25, MUC5B, and EPPK1. These are not among the five genes selected for interpretation in our re-analysis. However, our results contained genes with related biological functions, particularly immune-response and mucosal-barrier genes such as C1QC, MUC3A, and MUC20. A complete gene-by-gene comparison would require matching all 32 significant genes from our analysis with the full gene lists reported by the authors.
+
+***3. Which results were similar?***
+
+Both directions of the biological narrative of the study were similar in terms of the theme, infection alters immune and mucosal-barrier gene expression. Both analyses used the same reference genome assembly GRCh28 and comparable pipeline steps — the QC, alignment, to differential expression. 
+
+***4. Which results were different?***
+
+The study only uses 6 of the original samples— 3 control and 3 infected, instead of the full data set which differs from the original study with a full data set with 4 control, 5 infected, plus bacterial controls. The number of significantly differentially expressed genes is very likely much smaller compared to the original study since they had a larger sample size and possible different statistical thresholds.
+
+***5. Did you use exactly the same software as the authors?***
+
+Partially. The study used TopHat for alignment, HTSeqq for read counting and DESeq2 instead of DESeq from the original study. DESeq was used since it is a newer, updated version of the same statistical framework but uses different shrinkage estimation that alters the results, 
+
+***6. Did you use the same reference genome and annotation versions?***
+
+Yes. The analyses used the same general human reference, GRCh38. The original paper reports alignment to the Homo sapiens reference genome GRCh38.78, while our re-analysis used the GRCh38 primary assembly together with the Ensembl Release 78 GTF annotation. However, the original paper does not explicitly provide the exact GTF annotation filename used, so we cannot confirm that the annotation files were completely identical.
+
+***7. Did you analyze all samples or only a subset?***
+
+Only a subset was analyzed in the study which differs from the original study that has 4 controls, 5 infected and a bacterial control sample. 
+
+***8. Could differences in software versions, parameters, sample number, or reference files explain differences in the results?***
+
+Yes. Using DESeq instead of DESeq, a smaller sample size reduces statistical power to detect true differential expressed genes, and potentially different parameters can all lead to differences in the number and identity of significant raw reads and reference genome. 
+
+***9. What did this exercise teach you about reproducibility in molecular biology?***
+
+This exercise showed that reproducibility in molecular biology is rarely a simple matter of running the same data through the same pipeline and expecting identical results. Even when researchers use the same reference genome, the same general workflow, and start from the same publicly available raw data, small differences— such as software versions, sample size, or default parameter settings, can lead to different specific outcomes. This suggests that true reproducibility depends heavily on detailed and transparent documentation of every methodological choice, since even minor insignia can influence the final results. At the same time, the fact that the broader biological patterns can still be recovered despite these differences suggests that reproducibility should often be evaluated at the level of overall conclusions rather than requiring an exact match of every individual result, and that some degree of variability between independent analysis is normal and expected part of the scientific research rather than necessary a sign of error.
+
+## Galaxy History and Workflow Sharing
+
+To support collaboration and reproducibility, the completed Galaxy history and RNA-seq workflow were shared with the group members. The Galaxy history contains the complete analysis record, while the workflow provides the sequence of tools and parameters used in the RNA-seq re-analysis. The exported workflow file was uploaded to the group GitHub repository so that other members can import it into their own Galaxy accounts.
+
+**Table 8.** Shared Galaxy History and Workflow for the RNA-Seq Re-analysis.
+
+**Galaxy Resource**
+
+**Link / Access**
+
+Galaxy History
+
+[https://usegalaxy.org/u/ijanshane17/h/group3-infection-rnaseq-assignment3](https://usegalaxy.org/u/ijanshane17/h/group3-infection-rnaseq-assignment3) 
+
+Galaxy Workflow
+
+[https://usegalaxy.org/u/ijanshane17/w/group3-infection-rnaseq-workflow](https://usegalaxy.org/u/ijanshane17/w/group3-infection-rnaseq-workflow) 
+
+## GitHub Group Repository
+
+The group’s RNA-seq guided re-analysis was documented in a shared GitHub repository to organize the study information, analysis methods, Galaxy workflow, results, figures, and individual contributions of the group members. The repository also serves as a record of the files and evidence produced throughout the analysis.
+
+**Table 9.** GitHub Repository Information for the RNA-Seq Guided Re-analysis
+
+**Repository Information**
+
+**Details**
+
+Group Topic
+
+Group 3 – Infection
+
+Repository Name
+
+Group_3_RNA_Seq_Guided_Replication_Assignment
+
+Repository Link
+
+https://github.com/emperadofaith/Group_3_RNA_Seq_Guided_Replication_Assignment/tree/main/Assignment_RNASeq/methods 
+
+Main Assignment Folder
+
+Assignment_RNASeq/
+
+## Comparison of the Original Study and Galaxy Re-analysis
+
+To examine how closely the Galaxy re-analysis reproduced the published study, the main analysis steps and results were compared. The comparison focused on the dataset, quality control, reference files, alignment, gene counting, differential expression, significance criteria, and major biological findings.
+
+**Table 10.** Comparison of the Original RNA-Seq Analysis and the Galaxy Re-analysis.
+
+**Analysis Step**
+
+**Original Authors**
+
+**Our Galaxy Re-analysis**
+
+RNA-seq dataset
+
+The original study analyzed four uninfected human intestinal biopsy samples and five *S. Typhi* infected biopsy samples, together with four bacterial control samples for a separate bacterial analysis.
+
+Six human intestinal biopsy samples were analyzed, consisting of three uninfected controls and three *S. Typhi* infected samples.
+
+Quality control
+
+The original authors assessed sequence quality using FastQC version 0.10.0.
+
+FastQC version 0.12.1 and MultiQC were used to assess and summarize the quality of all six samples.
+
+Trimming
+
+The original authors did not report performing a read-trimming step before alignment.
+
+Read trimming was not performed because all samples showed good per-base sequence quality and passed the adapter-content check.
+
+Reference genome
+
+The original authors aligned the human RNA-seq reads to the *Homo sapiens* GRCh38 reference genome.
+
+The *Homo sapiens* GRCh38 primary assembly was used as the reference genome.
+
+Annotation
+
+The original paper referred to GRCh38.78 but did not clearly provide the exact annotation file used for the human analysis.
+
+The Ensembl Release 78 annotation file Homo_sapiens.GRCh38.78.gtf.gz was used.
+
+RNA-seq aligner
+
+The original authors aligned the human RNA-seq reads using TopHat version 2.1.1.
+
+TopHat version 2.1.1 in Galaxy was used for read alignment.
+
+Gene counting
+
+The original authors used HTSeq version 0.4.7 to generate gene-level read counts.
+
+featureCounts was used to generate gene-level read counts from the mapped RNA-seq reads.
+
+Differential expression
+
+The original authors used DESeq version 1.5.24 to identify genes with altered expression between infected and control samples.
+
+DESeq2 in Galaxy was used to compare the three infected samples with the three control samples.
+
+Significance threshold
+
+The original study considered genes significant using a p-value of 0.05 or lower together with fold-change criteria for increased or decreased expression.
+
+Genes with an adjusted p-value lower than 0.05 were considered significantly differentially expressed.
+
+Main genes or pathways identified
+
+The original study highlighted genes such as GSTM1, CRIP1, and CCL25 and reported changes in pathways associated with immune defense, B-cell receptor signaling, and host mucosal responses.
+
+A total of 32 significantly differentially expressed genes were identified, including 10 upregulated and 22 downregulated genes. Selected genes included C1QC, AADAC, MUC3A, ULK1, and MUC20, which were associated with immune response, metabolism, autophagy, and mucosal barrier function.
+
+## Molecular Biology Concepts Related to RNA-Seq Analysis
+
+To strengthen the understanding of the molecular biology concepts used in the RNA-seq analysis, the following questions address the basic principles of gene expression, sequencing data, genome annotation, normalization, statistical significance, and biological interpretation.
+
+***1. Why can RNA-seq be used to study gene expression?***
+
+RNA-seq works by reading all the RNA molecules a cell has made at a certain point. Since a gene is expressed when it gets copied into RNA, counting how many RNA reads come from each gene tell us how active that gene is. Genes being heavily used will produce a lot of RNA and show up with many reads, while genes that are barely used will show up with very few. Given these interpretations, it is much more understandable by researchers whether genes are ‘’on’’ of ‘’off’’ in a given condition. 
+
+***2. What is the difference between the genome FASTA and RNA-seq FASTQ files?***
+
+A genome FASTA file is like a fixed reference map which holds the complete DNA sequence of an organism and doesn’t change between experiments. A FASTQ file is different because it holds the actual raw data collected from one specific RNA-seq experiment. Short RNA sequences read by the sequencing machine, along with quality scores showing how confident the machine was about each base. 
+
+***3. Why is a genome annotation needed for gene-level expression analysis?***
+
+An annotation file acts like a label placed on top of the genome map, marking exactly where each gene starts and ends along the DNA. Without it, sequencing reads would just be pieces of data lined up somewhere on the genome with no biological meaning attached. The annotation allows those raw alignments to be sorted into actual genes, which is what makes gene-level expression counting possible in the first place. 
+
+***4. What does a high number of reads for a gene generally suggest?***
+
+A high number of reads generally suggests that the gene is being actively transcribed, meaning the cell is producing a large amount of RNA from it. However, this isn’t a perfectly simple measure, longer genes naturally accumulate more reads, and samples with a higher total number of reads will also show higher counts overall. Because of this, raw read counts usually need to be adjusted, or normalized, before they can be fairly compared or trusted. 
+
+***5. Why should biological replicates be included?***
+
+No two biological samples are ever exactly the same, even if they come from the same condition, because of natural variation between individuals, tissues, or even small differences in handling. Including replicates helps researchers separate a real, consistent effect of the experiment from small random differences that would show up anyway. Without replicates, there’s no way to know if a result reflects a true biological pattern or just chance variation in a single sample. 
+
+***6. What is an upregulated gene?***
+
+An upregulated gene is a gene whose activity increases under a certain condition, meaning more RNA is being produced from it compared to the control or baseline. This often appears as positive log2fold change in the data, showing that the gene became more active in response to the treatment or condition being studied. 
+
+***7. What is a downregulated gene?***
+
+A downregulated gene is a gene whose activity decreases under a certain condition, meaning less RNA is being produced and is usually represented as a negative log2fold change in the data— showing that the gene became less active in response to the treatment . Downregulation does not mean the gene is completely shut off instead, it means its expression level dropped relative to normal conditions, which can still have an important biological effect depending on the gene’s function. 
+
+***8. Why is normalization needed when comparing RNA-seq samples?***
+
+Different RNA-seq samples don’t always get sequenced to exactly the same depth, meaning some samples may simply have more total reads than others for purely technical reasons unrelated to biology. Normalization adjusts the numbers so that all samples are placed on a fair, comparable scale. In this manner, any differences  observed between samples reflect true biological changes rather than just differences in how much raw data happened to be collected. 
+
+***9. Why is adjusted p-value commonly used instead of only the raw p-value?***
+
+When thousands of genes are tested for differences at the same time, some of them will appear statistically significant purely by random chance, even if there is no real biological difference. The. Adjusted p-value corrects for this issue by accounting for the large number of comparisons being made at once, which gives a more trustworthy way to identify which genes are truly differentially expressed, rather than being misled by false positives. 
+
+***10. Why might your results differ from those reported by the original authors?***
+
+Differences can come from several practical sources, such as analyzing a smaller number of samples, using slightly different software tools, applying different parameter settings or significant cutoffs, or using different versions of the reference genome and gene annotation files. Even small technical differences like these can shift the exact list of significant genes. 
+
+***11. How can changes in gene expression help an organism respond to environmental stress or infection?***
+
+When an organism encounters stress or infection, it needs to react quickly without altering its actual DNA sequence. It does this by adjusting which genes are turned on or off. For example, activating genes involved in immune defense or repair, while shutting down genes that aren’t immediately necessary. So, this reversible control over gene activity allows the organism to adapt its internal processes to match the specific challenge it’s facing, helping it survive and recover more effectively. 
+
+***12. Does increased RNA abundance always mean that the amount of functional protein also increases? Explain.***
+
+Not necessarily, because having more RNA is only the first step toward making a protein. The RNA still needs to be translated into protein, and this process can be sped up, slowed down, or blocked by the cell depending on its needs. In addition, some RNA molecules may be broken down before they are used, and even after a protein is made, it can be modified or degraded at different rates. Because of these extra layers of control, an increase in RNA does not automatically guarantee a matching increase in the actual amount of working protein. 
+
+## Limitations and Modifications to the Original Workflow
+
+Although the major steps of the RNA-seq analysis were successfully reproduced in Galaxy, some parts of the original published workflow could not be followed exactly. Differences in software, sample selection, and Galaxy functionality required the use of reasonable alternatives. These changes and their possible effects on the results are summarized below. 
+
+**Table 11.** Modifications and Limitations in Reproducing the Original RNA-Seq Workflow.
+
+**Step**
+
+**Difference or Limitation**
+
+**Alternative Used**
+
+**Possible Effect on Results**
+
+Sample selection
+
+The complete set of human biopsy samples was not analyzed.
+
+Three control and three infected samples were selected for the re-analysis.
+
+Using fewer biological replicates may reduce statistical power and may change the number of significant genes detected.
+
+Gene counting
+
+The original study used HTSeq for gene-level counting.
+
+featureCounts was used as required in the Galaxy re-analysis.
+
+Differences in how reads are assigned to genes may result in slightly different gene counts.
+
+Differential expression
+
+The original study used DESeq.
+
+DESeq2 was used in Galaxy.
+
+Differences in normalization and statistical methods may affect log2 fold changes, adjusted p-values, and the genes identified as significant.
+
+Workflow extraction
+
+Galaxy was unable to automatically extract the workflow from the completed history because the server repeatedly returned a history-access error.
+
+The workflow was manually reconstructed in the Galaxy Workflow Editor and exported as a .ga file.
+
+This did not change the completed analysis results, but the workflow had to be recreated from the recorded analysis steps and parameters.
+
+Published pipeline reproduction
+
+Some software versions and exact parameters from the original study were different from those available or required in the current Galaxy workflow.
+
+The closest available Galaxy tools and documented settings were used.
+
+Software and parameter differences may contribute to differences between the published and re-analysis results.
+
+Despite these differences, the major RNA-seq analysis steps were successfully completed, including quality control, read mapping, gene-level counting, and differential expression analysis. The differences were documented to provide a transparent explanation of why the re-analysis may not produce exactly the same numerical results as the original study.
+
+**References **
+
+Bgee. (n.d.). *ENSG00000159189 (C1QC)*. [https://www.bgee.org/gene/ENSG00000159189](https://www.bgee.org/gene/ENSG00000159189) 
+
+Ensembl. (n.d.). *Homo sapiens GTF files: Ensembl release 78*.[ https://ftp.ensembl.org/pub/release-78/gtf/homo_sapiens/](https://ftp.ensembl.org/pub/release-78/gtf/homo_sapiens/)
+
+Guerra, F. E., Karlinsey, J. E., Libby, S. J., & Fang, F. C. (2025). Evasion of serum antibodies and complement by *Salmonella Typhi* and *Paratyphi A*. *PLOS Pathogens, 21*(5), e1012917.
+
+Han, X., Allaire, J. M., Crowley, S. M., Chan, J. J., Lau, K., Zhang, C., Hirota, S. A., Bergstrom, K., Knodler, L. A., & Vallance, B. A. (2024). Inflammasome activation links enteric *Salmonella* Typhimurium infection to a rapid, cytokine-dependent increase in intestinal mucin release. *Gut Microbes, 16*(1), 2413372. [https://doi.org/10.1080/19490976.2024.2413372](https://doi.org/10.1080/19490976.2024.2413372) 
+
+Kishore, U., & Reid, K. B. M. (2000). C1q: Structure, function, and receptors. *Immunopharmacology, 49*(1–2), 159–170. [https://doi.org/10.1016/S0162-3109(00)80301-X](https://doi.org/10.1016/S0162-3109\(00\)80301-X) 
+
+Montero, P., Roger, I., Milara, J., & Cortijo, J. (2025). Immunomodulatory properties of transmembrane mucins: From chronic diseases to cancer. *Physiological Reviews, 105*(4), [2233–2304](tel:2233–2304). https\://doi.org/10.1152/physrev.00034.2024
+
+National Center for Biotechnology Information. (n.d.). *AADAC arylacetamide deacetylase [Homo sapiens (human)]*. NCBI Gene. [https://www.ncbi.nlm.nih.gov/gene/13](https://www.ncbi.nlm.nih.gov/gene/13) 
+
+National Center for Biotechnology Information. (2026). *MUC3A mucin 3A, cell surface associated [Homo sapiens (human)]*. NCBI Gene. https\://www\.ncbi.nlm.nih.gov/gene/4584
+
+National Center for Biotechnology Information. (n.d.). *ULK1 unc-51 like autophagy activating kinase 1 [Homo sapiens (human)]*. NCBI Gene.[ https://www.ncbi.nlm.nih.gov/gene/8408/](https://www.ncbi.nlm.nih.gov/gene/8408/?utm_source=chatgpt.com)
+
+National Center for Biotechnology Information. (2026). *MUC20 mucin 20, cell surface associated [Homo sapiens (human)]*. NCBI Gene.[ https://www.ncbi.nlm.nih.gov/gene/200958](https://www.ncbi.nlm.nih.gov/gene/200958?utm_source=chatgpt.com)
+
+Nourbakhsh, M., Douglas, D. N., Pu, C. H., Lewis, J. T., Kawahara, T., Lisboa, L. F., Wei, E., Asthana, S., Quiroga, A. D., Law, L. M. J., Chen, C., Addison, W. R., Nelson, R., Houghton, M., Lehner, R., & Kneteman, N. M. (2013). Arylacetamide deacetylase: A novel host factor with important roles in the lipolysis of cellular triacylglycerol stores, VLDL assembly and HCV production. *Journal of Hepatology, 59*(2), 336–343. [https://doi.org/10.1016/j.jhep.2013.03.022](https://doi.org/10.1016/j.jhep.2013.03.022) 
+
+Torsilieri, H. M., Upchurch, C. M., Leitinger, N., & Casanova, J. E. (2024). Salmonella-induced cholesterol accumulation in infected macrophages suppresses autophagy via mTORC1 activation. *Molecular Biology of the Cell, 36*(1), ar3.[ https://doi.org/10.1091/mbc.E24-06-0283](https://doi.org/10.1091/mbc.E24-06-0283)
+
+Yamazaki, F., Kobayashi, K., Mochizuki, J., & Sashihara, T. (2024). Interleukin-22 enhanced the mucosal barrier and inhibited the invasion of *Salmonella enterica* in human-induced pluripotent stem cell-derived small intestinal epithelial cells. *FEMS Microbiology Letters, 371*, fnae006. [https://doi.org/10.1093/femsle/fnae006](https://doi.org/10.1093/femsle/fnae006) 
+
+Yang, L., Liao, Z.-Z., Ran, L., & Xiao, X.-H. (2025). Progress of arylacetamide deacetylase research in metabolic diseases. *Frontiers in Oncology, 15*, [1564419](tel:1564419). [https://doi.org/10.3389/fonc.2025.1564419](https://doi.org/10.3389/fonc.2025.1564419)
